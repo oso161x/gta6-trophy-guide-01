@@ -3,23 +3,93 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GTA VI trophy checklist</title>
+<title>GTA VI Trophy Guide — all 55 trophies, offline tracker &amp; roadmap to platinum</title>
+<meta name="description" content="A free, offline guide and tracker for the 55 PlayStation 5 trophies of Grand Theft Auto VI: official names, descriptions and grades, a checklist saved in your browser, a roadmap to the platinum, the one possibly missable trophy flagged, and a guide in the maker's own words for every trophy, with its sources.">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header>
-  <h1>GTA VI trophy checklist</h1>
-  <p id="progress">0 of 55 earned</p>
+<header class="masthead">
+  <div class="masthead-inner">
+    <p class="eyebrow">Grand Theft Auto VI &middot; PlayStation 5 &middot; 55 trophies</p>
+    <h1>GTA VI Trophy Guide</h1>
+    <p class="subtitle">Every trophy, tracked. The official list, a roadmap to the platinum, and a guide in our own words for each one — with its sources. Works offline, from its own files.</p>
+    <div class="progress-wrap" id="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+      <p class="progress-text"><strong id="progress-count">0 of 55 earned</strong> &middot; <span id="progress-pct">0%</span> &middot; <span id="progress-grades">0 platinum &middot; 0 gold &middot; 0 silver &middot; 0 bronze</span></p>
+    </div>
+  </div>
 </header>
-<div class="controls">
-  <label>Grade <select id="grade"><option value="all">All</option><option value="platinum">Platinum</option><option value="gold">Gold</option><option value="silver">Silver</option><option value="bronze">Bronze</option></select></label>
-  <button id="export" type="button">Export progress</button>
-  <label class="import">Import progress <input id="import" type="file" accept="application/json"></label>
-</div>
-<table>
-  <thead><tr><th>Earned</th><th>Trophy</th><th>Grade</th><th>How to get it</th></tr></thead>
-  <tbody id="rows"></tbody>
-</table>
+
+<main>
+  <section class="roadmap" id="roadmap" aria-label="Roadmap to the platinum">
+    <h2>Roadmap to the platinum — about 200 hours, one playthrough</h2>
+    <p class="roadmap-intro">PowerPyx rates the set 4 out of 10 and puts the platinum at about 200 hours; Push Square says 250 or more. Every trophy is single-player and offline — there are no online trophies. Cheats disable trophies and stop the game saving, so keep them off the file you use for this run. There is no mission replay, so keep a save at the start and end of each chapter (15 manual slots plus 1 autosave).</p>
+    <ol class="steps">
+      <li>
+        <h3>Step 1 — Story &amp; optional missions <span class="step-time">about 60–80 hours</span></h3>
+        <p>Play the story at your own pace through five chapters. Along the way: do the Chapter 1 morning meditation at Jason's house (see <a href="#trophy-28">Positive Mental Attitude</a> — the one trophy that may be missable); take optional missions as they appear (100% needs any 100 of them); scan every new vehicle with WAiNK (100% needs 200 of 277); study new animals through binoculars (100% needs 100 of 255); turn on progress and criminal-profile notifications so you can see what counts.</p>
+      </li>
+      <li>
+        <h3>Step 2 — The 100% checklist &amp; challenges <span class="step-time">about 100 hours</span></h3>
+        <p>After the story, the checklist opens at Progress &gt; Stats &gt; 100% Completion. Progress from the story already counts and nothing on it is missable. It is lenient — closer to 60% of true completion: 70 of 80 challenges, 15 of 18 meditations, 300 stunts; robberies, underwater discoveries, shooting ranges, drone races and Bret's quests need everything; 15 of 18 card sets. This step is where <a href="#trophy-14">A Long Road</a>, the gold for 100%, is earned.</p>
+      </li>
+      <li>
+        <h3>Step 3 — Strangers &amp; Freaks &amp; cleanup <span class="step-time">about 10 hours</span></h3>
+        <p>Most trophies should be done by now. <a href="#trophy-25">Strangers &amp; Freaks</a> is not part of 100%, so finish your 8 stranger strands, clean up anything left on the list, and the platinum — <a href="#trophy-1">Vice Got a Price!</a> — follows.</p>
+      </li>
+    </ol>
+    <p class="missable-callout"><strong>Missable?</strong> Only one trophy may be: <a href="#trophy-28">Positive Mental Attitude</a> (meditate at every spot). The Chapter 1 balcony meditation can pass you by — do it when it comes up. Every other trophy can be earned after the story. Use the <button type="button" class="link-button" id="missable-jump">Missable filter</button> below to see it on its own.</p>
+  </section>
+
+  <section class="controls" aria-label="Tracker controls">
+    <div class="controls-row">
+      <label class="search-label">Search <input id="search" type="search" placeholder="Trophy name, mission, or keyword…" autocomplete="off"></label>
+      <label class="grade-label">Grade
+        <select id="grade">
+          <option value="all">All grades</option>
+          <option value="platinum">Platinum</option>
+          <option value="gold">Gold</option>
+          <option value="silver">Silver</option>
+          <option value="bronze">Bronze</option>
+        </select>
+      </label>
+      <label class="check-label"><input id="spoiler" type="checkbox"> Hide story spoilers</label>
+      <label class="check-label"><input id="earned-only" type="checkbox"> Earned only</label>
+    </div>
+    <div class="controls-row">
+      <div class="kind-chips" id="kind-chips" role="group" aria-label="Filter by kind">
+        <button type="button" data-kind="all" class="chip active">All 55</button>
+        <button type="button" data-kind="story" class="chip">Story (12)</button>
+        <button type="button" data-kind="missable" class="chip">Missable (1)</button>
+        <button type="button" data-kind="collectibles" class="chip">Collectibles (6)</button>
+        <button type="button" data-kind="activities" class="chip">Activities (36)</button>
+        <button type="button" data-kind="online" class="chip">Online (0)</button>
+      </div>
+      <div class="io-buttons">
+        <button id="export" type="button">Export progress</button>
+        <label class="import">Import progress <input id="import" type="file" accept="application/json"></label>
+        <button id="reset" type="button">Reset</button>
+      </div>
+    </div>
+    <p class="controls-note" id="filter-note"></p>
+  </section>
+
+  <section class="list" id="list" aria-label="Trophy checklist">
+    <div id="cards"></div>
+    <p class="empty" id="empty" hidden>No trophies match this filter. Try clearing the search or picking another kind — or use the Online filter to see why it is empty.</p>
+  </section>
+
+  <section class="sources-note" aria-label="Sources">
+    <h2>Where the facts come from</h2>
+    <p>Official trophy names, descriptions and grades are shown as PlayStation publishes them, from the frozen official list (18 November 2026) — <a href="https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/">Exophase</a> and <a href="https://psnprofiles.com/trophies/43531-grand-theft-auto-vi">PSNProfiles</a>, which agree on every entry. Every guide on this page is written in the maker's own words and cites its sources beside it: the how-to detail draws on <a href="https://www.powerpyx.com/gta-6-grand-theft-auto-vi-trophy-guide-roadmap/">PowerPyx's trophy guide &amp; roadmap</a>, <a href="https://www.powerpyx.com/gta-6-100-completion-checklist-guide/">PowerPyx's 100% completion checklist</a>, <a href="https://www.gtabase.com/articles/gta-6/gta-6-achievements-trophies-list-ps5-xbox-series">GTABase's trophy list</a> and <a href="https://sixshore.com/gta-6/guides/trophies-and-achievements/">sixshore's trophy list &amp; roadmap</a>. Nothing here is copied from any of them. Five guides are marked unconfirmed where the guide writers have not pinned the method down yet.</p>
+    <p class="offline-note">This guide is a static web app: open <code>app/index.html</code> in a desktop browser and it works with the network off. Your checklist is saved in this browser only (localStorage); use Export to keep a copy, Import to bring it back.</p>
+  </section>
+</main>
+
+<footer>
+  <p>GTA VI Trophy Guide — an unofficial, fan-made tracker. Grand Theft Auto and Rockstar Games are trademarks of their owners; no Rockstar logo, artwork or game imagery is used here. Built for the make.fun bounty gta6-trophy-guide-01.</p>
+</footer>
+
 <script type="module" src="app.js"></script>
 </body>
 </html>
