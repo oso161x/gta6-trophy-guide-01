@@ -61,7 +61,10 @@ const appFiles: string[] = [];
 for (const p of appFiles) {
   if (!['.html', '.js', '.css', '.json'].includes(extname(p))) continue;
   const text = readFileSync(p, 'utf-8');
-  if (/(?:src|href)\s*=\s*["']https?:|@import\s+["']https?:|url\(\s*["']?https?:|fetch\(\s*["']https?:|import\(\s*["']https?:/.test(text)) {
+  // Only resource loads count: a <script>/<img>/<iframe> src, a <link> href,
+  // a CSS @import or url(), or a fetch()/import() of a URL. A plain <a href>
+  // to a source is not fetched — it opens only when the reader follows it.
+  if (/\bsrc\s*=\s*["']https?:|<link[^>]*\bhref\s*=\s*["']https?:|@import\s+["']https?:|url\(\s*["']?https?:|fetch\(\s*["']https?:|import\(\s*["']https?:|\bfrom\s+["']https?:/.test(text)) {
     fail(p.replace(here, '') + ' reaches for the network — the guide must work offline.');
   }
 }
