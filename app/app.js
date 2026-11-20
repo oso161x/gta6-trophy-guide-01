@@ -249,6 +249,9 @@ document.getElementById('import').addEventListener('change', async (e) => {
   try {
     const data = JSON.parse(await file.text());
     const ids = Array.isArray(data) ? data : data.earned;
+    // A file whose earned list is not a list is not a progress export:
+    // say so plainly instead of letting .filter throw on it.
+    if (!Array.isArray(ids)) throw new Error('no earned list in file');
     const valid = new Set(trophies.map((t) => t.id));
     earned = new Set(ids.filter((id) => valid.has(Number(id))).map(Number));
     save();

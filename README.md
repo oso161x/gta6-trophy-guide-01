@@ -34,7 +34,7 @@ Or open `app/index.html` directly from the files. No build step, no dependencies
 mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts
 ```
 
-`main.ts` checks the entry first (55 trophies with guides and sources, 3–4 screenshots under 256 KiB, no network references), then copies `app/` and `screenshots/` to the output directory and writes `dossier.json`.
+`main.ts` checks the entry first (55 trophies with guides and sources, grades splitting 1/2/6/46, 28 hidden, the one missable trophy, 3–4 screenshots under 256 KiB, no network references), then copies `app/` and `screenshots/` to the output directory and writes `dossier.json`. It refuses a dossier over the 1.5 MiB cap. `node main.ts --help` prints the usage; `--verbose` narrates each check; `--out <dir>` picks the output directory.
 
 ## Sources
 
